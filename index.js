@@ -4,7 +4,7 @@ import sqlite3 from 'sqlite3';
 import  totalPhoneBill from './totalPhoneBill.js';
 
 const app = express();
-//app.use(express.static('public'))
+app.use(express.static('public'))
 app.use(express.json())
 
 const  db = await sqlite.open({
@@ -43,9 +43,15 @@ async function deletePricePlan(plan_name){
     await db.run(sql, [plan_name])
 } 
 
+async function deletePricePlanById(id){
+    const sql = `delete from price_plan where id = ?`
+    await db.run(sql, [id])
+} 
+
 const result1 = await getPricePlans()
 console.log(result1)
 const result2 = await getSpecificPlan('call 201')
+//await deletePricePlanById(4)
 //await updatePlan(2.5, 3.49, 'call 201')
 //await deletePricePlan('amo_plan')
 //await addPricePlan('amo_plan', 1.49, 2.15)
@@ -62,7 +68,8 @@ plan
 
 })
 })*/
-
+const allTotals = {}
+const listOfTotals = []
 
 app.post('/api/phonebill', async function(req, res){
     const price_plan = req.body.price_plan
@@ -73,10 +80,12 @@ app.post('/api/phonebill', async function(req, res){
     const sms_cost = payment_plan[0].sms_price
 
     const total = totalPhoneBill(actions, call_cost, sms_cost)
+    allTotals[price_plan] = total
 
     res.json({
         status: "success",
         total
+
     })
 })
 
@@ -111,7 +120,20 @@ app.post('/api/price_plan/update', async function(req, res){
     })
 })
 
+app.post('/api/price_plan/delete', async function(req, res){
+    const id = req.body.id
+    await deletePricePlanById(id)
+    res.json({
+        status: "success",
+        message: "price plan deleted"
+    })
+})
 
+app.get('/api/history', function(req, res){
+    res.json({
+        allTotals
+    })
+})
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => `Server started ${PORT}`)

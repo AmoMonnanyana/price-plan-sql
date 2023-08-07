@@ -2,7 +2,7 @@ POST http://localhost:3000/api/phonebill
 content-type: application/json
 
 {
-    "price_plan" : "sms_kick_100",
+    "price_plan" : "call 101",
     "actions" : "call, sms, call"
 }
 
@@ -12,12 +12,35 @@ POST http://localhost:3000/api/price_plan/create
 content-type: application/json
 
 {
-    "name" : "sms_kick_100",
-    "call_cost" : 2.65,
-    "sms_cost" : 0.45
+    "name" : "call 501",
+    "call_cost" : 1.80,
+    "sms_cost" : 0.67
+}
+
+###
+POST http://localhost:3000/api/price_plan/update
+content-type: application/json
+
+{
+    "name" : "call_301",
+    "call_cost" : 3.65,
+    "sms_cost" : 1.70
+}
+
+###
+
+POST http://localhost:3000/api/price_plan/delete
+content-type: application/json
+
+{
+    "id" : 5
 }
 
 ###
 GET http://localhost:3000/api/price_plans/
+
+###
+
+GET http://localhost:3000/api/history
 
 ###
