@@ -1,0 +1,23 @@
+POST http://localhost:3000/api/phonebill
+content-type: application/json
+
+{
+    "price_plan" : "sms_kick_100",
+    "actions" : "call, sms, call"
+}
+
+###
+
+POST http://localhost:3000/api/price_plan/create
+content-type: application/json
+
+{
+    "name" : "sms_kick_100",
+    "call_cost" : 2.65,
+    "sms_cost" : 0.45
+}
+
+###
+GET http://localhost:3000/api/price_plans/
+
+###
