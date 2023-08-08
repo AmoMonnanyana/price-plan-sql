@@ -12,6 +12,8 @@ const  db = await sqlite.open({
     driver:  sqlite3.Database
 });
 
+await db.migrate();
+
 console.log('start')
 
 //get price plans
@@ -58,7 +60,7 @@ const result2 = await getSpecificPlan('call 201')
 console.log(result2)
 console.log('end')
 
-console.log(result2[0].plan_name)
+console.log(result2[0].call_price)
 /*app.get('/api/phonebill', async function(req, res){
 const plan_name = req.query.plan_name
 const plan = await getSpecificPlan(plan_name)
@@ -68,8 +70,9 @@ plan
 
 })
 })*/
+
+
 const allTotals = {}
-const listOfTotals = []
 
 app.post('/api/phonebill', async function(req, res){
     const price_plan = req.body.price_plan
@@ -78,10 +81,10 @@ app.post('/api/phonebill', async function(req, res){
     const payment_plan = await getSpecificPlan(price_plan)
     const call_cost = payment_plan[0].call_price
     const sms_cost = payment_plan[0].sms_price
-
     const total = totalPhoneBill(actions, call_cost, sms_cost)
-    allTotals[price_plan] = total
 
+    allTotals[price_plan] = total
+    
     res.json({
         status: "success",
         total

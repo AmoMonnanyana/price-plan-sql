@@ -16,6 +16,7 @@ document.addEventListener('alpine:init', () => {
         planId: 0,
         deleteMessage: '',
         billHistory: [],
+        thePlans: [],
 
         calculateBill(){
            return axios.post(`/api/phonebill`, {
@@ -23,7 +24,9 @@ document.addEventListener('alpine:init', () => {
                 "actions" : this.actions
             }).then((result) => {
                 this.totalPhoneBill = result.data.total
-                console.log(result.data)
+                //console.log(result.data)
+                //this.billHistory.push(this.totalPhoneBill)
+                
             })
         },
         getAllPricePlans(){
@@ -31,8 +34,8 @@ document.addEventListener('alpine:init', () => {
            .then((result) => {
            // console.log(result.data)
             this.allPricePlans = result.data.price_plans
-            console.log(this.allPricePlans)
-            console.log(this.allPricePlans[0])
+            //console.log(this.allPricePlans)
+            //console.log(this.allPricePlans[0])
             
            })
         },
@@ -68,8 +71,10 @@ document.addEventListener('alpine:init', () => {
             return axios.get(`/api/history`)
             .then((result) => {
                 this.billHistory = result.data.allTotals
-                console.log(result.data)
+                this.thePlans =  Object.keys(this.billHistory)
                 console.log(this.billHistory)
+                console.log(this.thePlans)
+               
             })
         }
       }

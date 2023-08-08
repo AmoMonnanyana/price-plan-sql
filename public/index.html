@@ -72,6 +72,35 @@
     <section>
         <h2>Show a list of all submitted bill prices</h2>
         <Button @click="getBillHistory">get bill history</Button>
+       
+       <table>
+        <thead>
+            <tr>
+                <td>Price Plan</td>
+                <td>Bill total</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+            
+            <td>
+            <template x-for="plans in thePlans">
+                <tr x-text="plans"></tr>
+            </template>
+            </td>
+    
+            <td>
+                <template x-for="totals in billHistory">
+                <tr x-text="totals"></tr>
+            </template>
+            </td>
+            <tr x-show="actions">
+                <td>Bill Plan</td>
+                <td coldspan="2" x-text="actions"></td>
+            </tr>
+        </tbody>
+       
+       </table> 
     </section>
 </body>
 </html>
