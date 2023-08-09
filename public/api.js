@@ -4,6 +4,7 @@ document.addEventListener('alpine:init', () => {
         totalPhoneBill: '',
         price_plan: '',
         actions: '',
+        submittedList: '',
         allPricePlans : [],
         newPlanName: '',
         newSmsCost: 0,
@@ -17,6 +18,10 @@ document.addEventListener('alpine:init', () => {
         deleteMessage: '',
         billHistory: [],
         thePlans: [],
+        viewPlans: false,
+        listOfBills: [],
+        showHistory: false,
+        showTotal: false,
 
         calculateBill(){
            return axios.post(`/api/phonebill`, {
@@ -24,9 +29,14 @@ document.addEventListener('alpine:init', () => {
                 "actions" : this.actions
             }).then((result) => {
                 this.totalPhoneBill = result.data.total
-                //console.log(result.data)
-                //this.billHistory.push(this.totalPhoneBill)
-                
+                localStorage['actions'] = this.actions
+                this.showTotal = true
+                setTimeout(() => {
+                    this.price_plan = ''
+                    this.actions = ''
+                    this.totalPhoneBill = ''
+                    this.showTotal = false
+                  }, 3000)
             })
         },
         getAllPricePlans(){
@@ -34,9 +44,7 @@ document.addEventListener('alpine:init', () => {
            .then((result) => {
            // console.log(result.data)
             this.allPricePlans = result.data.price_plans
-            //console.log(this.allPricePlans)
-            //console.log(this.allPricePlans[0])
-            
+            this.viewPlans = !this.viewPlans
            })
         },
 
@@ -47,6 +55,12 @@ document.addEventListener('alpine:init', () => {
                 "sms_cost" : this.newSmsCost
             }).then((result) =>{
                 this.newMessage = result.data.message
+                setTimeout(() => {
+                    this.newPlanName = ''
+                    this.newCallCost = 0
+                    this.newSmsCost = 0
+                    this.newMessage = ''
+                  }, 3000)
             })
         },
         updatePlan(){
@@ -56,6 +70,12 @@ document.addEventListener('alpine:init', () => {
                 "sms_cost" : this.updateSmsCost
             }).then((result) => {
                 this.updateMessage = result.data.message
+                setTimeout(() => {
+                    this.updatename = ''
+                    this.updateCallCost = 0
+                    this.updateSmsCost = 0
+                    this.updateMessage = ''
+                  }, 3000)
             })
         },
     
@@ -64,6 +84,10 @@ document.addEventListener('alpine:init', () => {
                 "id" : this.planId
             }).then((result) => {
                 this.deleteMessage = result.data.message
+                setTimeout(() => {
+                    this.planId = 0
+                    this.deleteMessage = ''
+                  }, 3000)
             })
         },
 
@@ -72,9 +96,10 @@ document.addEventListener('alpine:init', () => {
             .then((result) => {
                 this.billHistory = result.data.allTotals
                 this.thePlans =  Object.keys(this.billHistory)
+                this.listOfBills = result.data.listOfBills
                 console.log(this.billHistory)
-                console.log(this.thePlans)
-               
+                console.log(this.listOfBills)
+                this.showHistory = !this.showHistory
             })
         }
       }

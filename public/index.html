@@ -9,26 +9,29 @@
     <title> Total phonebill</title>
 </head>
 <body x-data="phoneBill">
-    <h1>Total phonebill</h1>
+    <h1>Total Phonebill</h1>
     <section>
-        <h2>Calculate the total phoneBill</h2>
+        <h2>Calculate The Total PhoneBill</h2>
         <input type="text" x-model="price_plan" placeholder="plan name">
         <input type="text" x-model="actions" placeholder="phone log">
         <button @click="calculateBill">Calculate</button><br>
-        <label for="totalPhoneBill">Total bill = </label>
-        <div x-text="totalPhoneBill"></div>
+        <span x-show="showTotal" x-transition>
+         <label for="totalPhoneBill">Total Bill = </label>
+        <input x-model="totalPhoneBill" id="totalPhoneBill" value="totalPhoneBill">
+        </span>
+        
     </section>
 
     <section>
-        <h2>Get all the price plans</h2>
+        <h2>Get All The Price Plans</h2>
         <button @click="getAllPricePlans">Get all Price Plans</button>
-        <table>
+        <table x-show="viewPlans" x-transition>
             <head>
                 <tr>
                     <td>Id</td>
-                    <td>Plan name</td>
-                    <td>Sms price</td>
-                    <td>Call price</td>
+                    <td>Plan Name</td>
+                    <td>Sms Price</td>
+                    <td>Call Price</td>
                 </tr>
             </head>
             <tbody>
@@ -45,39 +48,40 @@
     </section>
 
     <section>
-        <h2>Create a new price plan</h2>
+        <h2>Create New Price Plan</h2>
         <input type="text" placeholder="plan name" x-model="newPlanName">
         <input type="number" placeholder="call cost" x-model="newCallCost">
         <input type="number" placeholder="sms cost" x-model="newSmsCost">
-        <button @click="addNewPlan">Add to price plan</button>
+        <button @click="addNewPlan">Add To Price Plan</button>
         <div x-text="newMessage"></div>
     </section>
 
     <section>
-        <h2>Update a price plan</h2>
+        <h2>Update Price Plan</h2>
         <input type="text" placeholder="plan name" x-model="updatename">
         <input type="number" placeholder="call cost" x-model="updateCallCost">
         <input type="number" placeholder="sms cost" x-model="updateSmsCost">
-        <button @click="updatePlan">Update price plan</button>
+        <button @click="updatePlan">Update Price Plan</button>
         <div x-text="updateMessage"></div>
     </section>
 
     <section>
-        <h2>Delete a price plan</h2>
+        <h2>Delete Price Plan</h2>
         <input type="number" placeholder="plan Id" x-model="planId">
-        <button @click="deletePlan"> Delete price plan</button>
+        <button @click="deletePlan"> Delete Price Plan</button>
         <div x-text="deleteMessage"></div>
     </section>
 
     <section>
-        <h2>Show a list of all submitted bill prices</h2>
-        <Button @click="getBillHistory">get bill history</Button>
+        <h2>Show Submitted Bill Prices</h2>
+        <Button @click="getBillHistory">Get Bill History</Button>
        
-       <table>
+       <table x-show="showHistory" x-transion>
         <thead>
             <tr>
                 <td>Price Plan</td>
-                <td>Bill total</td>
+                <td>Bill Total</td>
+                <td>Bill List</td>
             </tr>
         </thead>
         
@@ -94,10 +98,12 @@
                 <tr x-text="totals"></tr>
             </template>
             </td>
-            <tr x-show="actions">
-                <td>Bill Plan</td>
-                <td coldspan="2" x-text="actions"></td>
-            </tr>
+
+            <td>
+                <template x-for="bills in listOfBills">
+                <tr x-text="bills"></tr>
+            </template>
+            </td>
         </tbody>
        
        </table> 

@@ -73,6 +73,8 @@ plan
 
 
 const allTotals = {}
+const listOfBills = {}
+let countBills = 0
 
 app.post('/api/phonebill', async function(req, res){
     const price_plan = req.body.price_plan
@@ -82,9 +84,12 @@ app.post('/api/phonebill', async function(req, res){
     const call_cost = payment_plan[0].call_price
     const sms_cost = payment_plan[0].sms_price
     const total = totalPhoneBill(actions, call_cost, sms_cost)
+    countBills++
+    let thePlan = `${countBills}_bill-${price_plan}`
+    let eachPlan = `${countBills}_${price_plan}`
+    allTotals[eachPlan] = total
+    listOfBills[thePlan] = actions
 
-    allTotals[price_plan] = total
-    
     res.json({
         status: "success",
         total
@@ -134,7 +139,8 @@ app.post('/api/price_plan/delete', async function(req, res){
 
 app.get('/api/history', function(req, res){
     res.json({
-        allTotals
+        allTotals,
+        listOfBills
     })
 })
 const PORT = process.env.PORT || 3000;
