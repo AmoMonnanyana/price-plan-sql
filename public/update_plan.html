@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script src="api.js"></script>
-    <title> Total Phonebill</title>
+    <title>Update Plan</title>
 </head>
 <body x-data="phoneBill">
     <nav class="navbar navbar-expand-lg bg-success">
@@ -28,45 +28,15 @@
         </div>
       </nav>
 
-      <div id="home_page">
-        <h1>PHONE BILL CALCULATOR</h1>
-      </div>
-
-    <div class="container text-center">
-        
-          <div id="prices" class="row">
-          <div class="col  bg-dark bg-opacity-10 rounded border m-3">
-            
-            
-          </div>
+      <section>
+        <h4 class="m-2">Update Price Plan</h4>
+        <div class="input-group mb-3">
+        <input  type="text" class="form-control m-2" placeholder="plan name" x-model="updatename">
+        <input  type="number" class=" form-control m-2" placeholder="call cost" x-model="updateCallCost">
+        <input  type="number" class="form-control m-2"placeholder="sms cost" x-model="updateSmsCost">
         </div>
-
-        <div class="row ">
-            <div id="new_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            
-
-            <div id = "update_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-                
-                
-            </div>
-          
-
-          
-            <div id= "delete_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            </div>
-            </div>
-
-            <div class="row">
-            <div id="show_history" class="col bg-dark bg-opacity-10 rounded border m-3">
-                
-               
-            </div>
-          </div>
-    </div>
-
+        <button class="btn btn-success" type="button" @click="updatePlan">Update Price Plan</button>
+        <div class="m-2" x-text="updateMessage"></div>
+    </section>
 </body>
 </html>

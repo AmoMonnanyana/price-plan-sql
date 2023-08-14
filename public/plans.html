@@ -10,9 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script src="api.js"></script>
-    <title> Total Phonebill</title>
+    <title>Price Plans</title>
 </head>
 <body x-data="phoneBill">
+
     <nav class="navbar navbar-expand-lg bg-success">
         <div class="container-fluid">
           <a class="navbar-brand" aria-current="page" href="./index.html">TOTAL PHONEBILL</a>
@@ -28,45 +29,29 @@
         </div>
       </nav>
 
-      <div id="home_page">
-        <h1>PHONE BILL CALCULATOR</h1>
-      </div>
-
-    <div class="container text-center">
-        
-          <div id="prices" class="row">
-          <div class="col  bg-dark bg-opacity-10 rounded border m-3">
-            
-            
-          </div>
-        </div>
-
-        <div class="row ">
-            <div id="new_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            
-
-            <div id = "update_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-                
-                
-            </div>
-          
-
-          
-            <div id= "delete_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            </div>
-            </div>
-
-            <div class="row">
-            <div id="show_history" class="col bg-dark bg-opacity-10 rounded border m-3">
-                
-               
-            </div>
-          </div>
-    </div>
-
+    <section>
+        <h4 class="m-2">Get All The Price Plans</h4>
+        <button class="m-2 btn btn-success" type="button" @click="getAllPricePlans">Get all Price Plans</button>
+        <table class="table" x-show="viewPlans" x-transition>
+            <head>
+                <tr>
+                    <td>Id</td>
+                    <td>Plan Name</td>
+                    <td>Sms Price</td>
+                    <td>Call Price</td>
+                </tr>
+            </head>
+            <tbody>
+                    <template x-for="plans in allPricePlans">
+                        <tr>
+                        <td x-text="plans.id"></td>
+                        <td x-text="plans.plan_name"></td>
+                        <td x-text="plans.sms_price"></td>
+                        <td x-text="plans.call_price"></td>
+                        </tr>   
+                    </template>
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>

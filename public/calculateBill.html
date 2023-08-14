@@ -10,9 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script src="api.js"></script>
-    <title> Total Phonebill</title>
+    <title>Bill Calculator</title>
 </head>
 <body x-data="phoneBill">
+
     <nav class="navbar navbar-expand-lg bg-success">
         <div class="container-fluid">
           <a class="navbar-brand" aria-current="page" href="./index.html">TOTAL PHONEBILL</a>
@@ -28,45 +29,16 @@
         </div>
       </nav>
 
-      <div id="home_page">
-        <h1>PHONE BILL CALCULATOR</h1>
-      </div>
-
-    <div class="container text-center">
-        
-          <div id="prices" class="row">
-          <div class="col  bg-dark bg-opacity-10 rounded border m-3">
-            
-            
-          </div>
+    <section>
+        <h4 class="m-2">Calculate The Total PhoneBill</h4>
+        <div class="input-group mb-3">
+        <input  class="m-1 form-control" type="text" x-model="price_plan" placeholder="plan name">
+        <input  class="m-1 form-control" type="text" x-model="actions" placeholder="phone log">
         </div>
-
-        <div class="row ">
-            <div id="new_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            
-
-            <div id = "update_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-                
-                
-            </div>
-          
-
-          
-            <div id= "delete_plan" class="col-md bg-dark bg-opacity-10 rounded border m-3">
-              
-              
-            </div>
-            </div>
-
-            <div class="row">
-            <div id="show_history" class="col bg-dark bg-opacity-10 rounded border m-3">
-                
-               
-            </div>
-          </div>
-    </div>
-
+        <button class="m-2 btn btn-success" type="button" @click="calculateBill">Calculate</button>
+        <p class="m-2" x-show="showTotal" x-transition>
+        <span x-text=" 'Total Bill = ' + totalPhoneBill"></span>
+        </p>
+    </section>
 </body>
 </html>
