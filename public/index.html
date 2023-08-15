@@ -12,12 +12,12 @@
     <script src="api.js"></script>
     <title> Total Phonebill</title>
 </head>
-<body x-data="phoneBill">
+<body x-data="phoneBill" class="homepage">
   <div class="text-center bg-dark bg-opacity-10 w-100 text-center rounded">
     
     <nav class="navbar navbar-expand-lg bg-success">
         <div class="container-fluid">
-          <a class="navbar-brand" aria-current="page" href="./index.html">TOTAL PHONEBILL</a>
+          <a class="navbar-brand" aria-current="page" href="./index.html"><strong>AMOGELANG PHONEBILL</strong></a>
             <div class="navbar-nav nav-underline">
               <a class="nav-link collapse navbar-collapse"  href="./plans.html">Price Plans</a>
               <a class="nav-link" href="./calculateBill.html">Total Bill</a>
@@ -31,9 +31,48 @@
       </nav>
 
       <div class="text-center">
-        <h1>PHONE BILL CALCULATOR</h1>
+        
       </div>
-  </div>
+  
+      <div class="container">
+      <h1 class="m-5">PHONE BILL CALCULATOR</h1>
+        <h5 class="m-5">
+          Keep track of your phone bill expenses with this calculator!
+        </h5>
+
+        <p class="m-5">
+          It allows you to estimate your projected bill, 
+          choose the best price plan suited for you and explore various prices of your choice.<br> 
+          See the featured price plans below or <a href="./plans.html">click</a> to view more.
+        </p>
+        <div class="m-5">
+      <h5>Featured Price Plans</h5>
+        <table class="table w-75 table-success">
+          <thead>
+            <tr>
+              <th class="bg-secondary">Plan Name</th>
+              <th class="bg-secondary">Sms Price</th>
+              <th class="bg-secondary">Call Prices</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>amo plan</td>
+              <td>R1.34</td>
+              <td>R1.45</td>
+            </tr>
+
+            <tr>
+              <td>save</td>
+              <td>R0.75</td>
+              <td>R1.76</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+    
+
+      </div>
 
 </body>
 </html>

@@ -4,5 +4,8 @@ body{
 }
 
 .homepage {
-    background-image: url('./3221357.jpg');
+    background-image: url('./_59368231-6b2c-4396-9c52-32d9025c0ebc.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
 }
