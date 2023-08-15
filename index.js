@@ -78,7 +78,7 @@ app.post('/api/price_plan/delete', async function(req, res){
     await deletePricePlanById(id)
     res.json({
         status: "success",
-        message: "price plan deleted"
+        message: `price plan with id=${id} deleted`
     })
 })
 

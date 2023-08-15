@@ -28,14 +28,17 @@
         </div>
       </nav>
 
-      <section>
+      <section class="container text-center bg-dark bg-opacity-10 text-center rounded">
+
+        
         <h4 class="m-2">Update Price Plan</h4>
-        <div class="input-group mb-3">
-        <input  type="text" class="form-control m-2" placeholder="plan name" x-model="updatename">
-        <input  type="number" class=" form-control m-2" placeholder="call cost" x-model="updateCallCost">
-        <input  type="number" class="form-control m-2"placeholder="sms cost" x-model="updateSmsCost">
+        <p>Specify the name of plan to be updated, provide new prices for sms's and call's accordingly and click the button to update.</p>
+        <div class="row m-3">
+        <input  type="text" class="form-control col-md m-2" placeholder="plan name" x-model="updatename">
+        <input  type="number" class=" form-control col-md m-2" placeholder="call cost" x-model="updateCallCost">
+        <input  type="number" class="form-control col-md m-2"placeholder="sms cost" x-model="updateSmsCost">
         </div>
-        <button class="btn btn-success" type="button" @click="updatePlan">Update Price Plan</button>
+        <button class="btn btn-success m-3" type="button" @click="updatePlan">Update Price Plan</button>
         <div class="m-2" x-text="updateMessage"></div>
     </section>
 </body>

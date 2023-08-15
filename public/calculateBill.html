@@ -18,7 +18,7 @@
         <div class="container-fluid">
           <a class="navbar-brand" aria-current="page" href="./index.html">TOTAL PHONEBILL</a>
             <div class="navbar-nav nav-underline">
-              <a class="nav-link collapse navbar-collapse"  href="./plans.html">Price Plans</a>
+              <a class="nav-link"  href="./plans.html">Price Plans</a>
               <a class="nav-link" href="./calculateBill.html">Total Bill</a>
               <a class="nav-link" href="./new_plan.html">New Price Plan</a>
               <a class="nav-link" href="./update_plan.html">Update Price Plan</a>
@@ -29,16 +29,34 @@
         </div>
       </nav>
 
-    <section>
-        <h4 class="m-2">Calculate The Total PhoneBill</h4>
-        <div class="input-group mb-3">
-        <input  class="m-1 form-control" type="text" x-model="price_plan" placeholder="plan name">
-        <input  class="m-1 form-control" type="text" x-model="actions" placeholder="phone log">
+    <section class="container my-6 text-center bg-dark bg-opacity-10 rounded">
+        <h4 class="m-4">Calculate The Total PhoneBill</h4>
+        <div>
+          <h5>Bill Calculator</h5>
+          <p >
+            Use the calculator below to compute the total phonebill using the selected price plan and phone log. The price plans are available <a href="./plans.html">here</a>. 
+            The phone log is a record of calls and sms's made in the format ("call, sms").
+            <strong>e.g. plan name : sms 101;
+                phone log : call, sms, call, sms
+              </strong>
+          </p>
         </div>
-        <button class="m-2 btn btn-success" type="button" @click="calculateBill">Calculate</button>
+        
+        <div>
+        <div class="row ">
+        <input  class="m-1 col-md form-control" type="text" x-model="price_plan" placeholder="plan name">
+        <input  class="m-1 col-md form-control" type="text" x-model="actions" placeholder="phone log">
+        </div>
+        <button class="m-3 btn btn-success" 
+         type="button" @click="calculateBill">Calculate</button>
         <p class="m-2" x-show="showTotal" x-transition>
         <span x-text=" 'Total Bill = ' + totalPhoneBill"></span>
         </p>
+        </div>
     </section>
+
+    <template x-if="totalPhoneBill">
+      
+    </template>
 </body>
 </html>

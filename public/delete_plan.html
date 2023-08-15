@@ -28,12 +28,18 @@
         </div>
       </nav>
 
-      <section>
-        <h4 class="m-2">Delete Price Plan</h4>
-        <div class="input-group mb-3">
-        <input class="m-2 form-control" type="number" placeholder="plan Id" x-model="planId">
-        <button class="m-2 btn btn-success" type="button" @click="deletePlan"> Delete Price Plan</button>
+      <section class="container text-center w-50 bg-dark bg-opacity-10 text-center rounded">
+        
+        <h4 class="m-3">Delete Price Plan</h4>
+        <p>
+          Specify the price plan id and click the button to delete the plan.
+          <p>E.g. <strong>plan id: 6; result: price plan with id = 6 deleted.</strong></p> 
+        </p>
+        <div class="row m-3">
+        <input class="col-md form-control" type="number" placeholder="plan Id" x-model="planId">
         </div>
+        <button class="m-3 btn btn-success" type="button" @click="deletePlan"> Delete Price Plan</button>
+        
         <div class="m-2" x-text="deleteMessage"></div>
     </section>
 </body>

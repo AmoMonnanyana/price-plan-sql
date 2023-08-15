@@ -22,6 +22,7 @@ document.addEventListener('alpine:init', () => {
         listOfBills: [],
         showHistory: false,
         showTotal: false,
+        countBills: 0,
 
         calculateBill(){
            return axios.post(`/api/phonebill`, {
@@ -31,6 +32,7 @@ document.addEventListener('alpine:init', () => {
                 this.totalPhoneBill = result.data.total
                 localStorage['actions'] = this.actions
                 this.showTotal = true
+                this.countBills++
                 setTimeout(() => {
                     this.price_plan = ''
                     this.actions = ''

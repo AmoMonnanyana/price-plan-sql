@@ -29,16 +29,25 @@
         </div>
       </nav>
 
-    <section>
-        <h4 class="m-2">Get All The Price Plans</h4>
-        <button class="m-2 btn btn-success" type="button" @click="getAllPricePlans">Get all Price Plans</button>
-        <table class="table" x-show="viewPlans" x-transition>
+    <section class="container bg-dark bg-opacity-10 text-center rounded">
+      
+        <h4 class="m-3">Get All The Price Plans</h4>
+        <p>
+        <strong>Click to view the list of all available prices</strong>
+      </p>
+      <p>
+        Add a new price plan to the list <a href="./new_plan.html">here</a>, modify a price plan <a href="./update_plan.html">here</a> and delete a price_plan <a href="./delete_plan.html">here</a>.
+      </p>
+      
+        <button class="m-3 btn btn-success" type="button" @click="getAllPricePlans">Get all Price Plans</button>
+        <div class="row m-3">
+           <table class="table" x-show="viewPlans" x-transition>
             <head>
                 <tr>
-                    <td>Id</td>
-                    <td>Plan Name</td>
-                    <td>Sms Price</td>
-                    <td>Call Price</td>
+                    <th>Id</th>
+                    <th>Plan Name</th>
+                    <th>Sms Price</th>
+                    <th>Call Price</th>
                 </tr>
             </head>
             <tbody>
@@ -52,6 +61,8 @@
                     </template>
             </tbody>
         </table>
+        </div>
+       
     </section>
 </body>
 </html>

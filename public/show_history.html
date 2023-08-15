@@ -28,40 +28,39 @@
         </div>
       </nav>
 
-      <section>
-        <h4 class="m-2">Show Submitted Bill Prices</h4>
-        <Button class="m-2 btn btn-success" type="button" @click="getBillHistory">Get Bill History</Button>
-       
-       <table  class="table" x-show="showHistory" x-transion>
+      <section class="container bg-dark bg-opacity-10 text-center rounded">
+        <h4 class="m-3">Show Submitted Bill Prices</h4>
+        <p>Click to view list of previously calculated phone bills.</p>
+        <Button class="m-3 btn btn-success" type="button" @click="getBillHistory">Get Bill History</Button>
+       <div class="row m-3">
+        <table  class="table" x-show="showHistory" x-transion>
         <thead>
-            <td>
-                <th>Price Plan</th>
-                <th>Bill Total</th>
-                <th>Bill List</th>
-            </td>
+                <th class="border">Price Plan</th>
+                <th class="border">Bill Total</th>
+                <th class="border">Bill List</th>
         </thead>
-        
         <tbody>
-            
-            <td>
+            <td class="border">
             <template x-for="plans in thePlans">
                 <tr x-text="plans"></tr>
             </template>
             </td>
     
-            <td>
+            <td class="border">
                 <template x-for="totals in billHistory">
                 <tr x-text="totals"></tr>
             </template>
             </td>
 
-            <td>
+            <td class="border">
                 <template x-for="bills in listOfBills">
                 <tr x-text="bills"></tr>
             </template>
             </td>
         </tbody>
        </table> 
+       </div>
+       
     </section>
 </body>
 </html>
