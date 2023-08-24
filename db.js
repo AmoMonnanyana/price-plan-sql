@@ -42,3 +42,4 @@ export async function deletePricePlanById(id){
     const sql = `delete from price_plan where id = ?`
     await db.run(sql, [id])
 } 
+

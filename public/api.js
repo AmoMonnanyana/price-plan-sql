@@ -23,21 +23,33 @@ document.addEventListener('alpine:init', () => {
         showHistory: false,
         showTotal: false,
         countBills: 0,
+        failureMessage: '',
+        totalFail: false,
 
         calculateBill(){
            return axios.post(`/api/phonebill`, {
                 "price_plan" : this.price_plan,
                 "actions" : this.actions
             }).then((result) => {
+                
+                if(result.data.status == "success") {
                 this.totalPhoneBill = result.data.total
                 localStorage['actions'] = this.actions
                 this.showTotal = true
                 this.countBills++
+                console.log(result.data.total)
+                } else if (result.data.status == "failure") {
+                    this.failureMessage = result.data.message
+                    this.totalFail = true
+                }
+                
                 setTimeout(() => {
                     this.price_plan = ''
                     this.actions = ''
                     this.totalPhoneBill = ''
                     this.showTotal = false
+                    this.totalFail = false
+                    this.failureMessage = ''
                   }, 3000)
             })
         },

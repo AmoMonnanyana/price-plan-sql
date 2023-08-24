@@ -9,3 +9,8 @@ body{
     background-size: cover;
     color: white;
 }
+
+.warningText {
+    color: red;
+    font-weight:bold
+}

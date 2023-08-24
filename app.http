@@ -2,7 +2,7 @@ POST http://localhost:3000/api/phonebill
 content-type: application/json
 
 {
-    "price_plan" : "call 201",
+    "price_plan" : "sms 101",
     "actions" : "call, sms, call, call, sms"
 }
 
@@ -22,7 +22,7 @@ POST http://localhost:3000/api/price_plan/update
 content-type: application/json
 
 {
-    "name" : "call_301",
+    "name" : "call9801",
     "call_cost" : 3.65,
     "sms_cost" : 1.70
 }

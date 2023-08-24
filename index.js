@@ -8,13 +8,14 @@ app.use(express.static('public'))
 app.use(express.json())
 
 const result1 = await getPricePlans()
-console.log(result1)
-const result2 = await getSpecificPlan('call 201')
+//console.log(result1)
+const result2 = await getSpecificPlan('call 501')
+  console.log(result2)
 
-console.log(result2)
+
 console.log('end')
 
-console.log(result2[0].call_price)
+//console.log(result2[0].call_price)
 
 
 const allTotals = {}
@@ -25,19 +26,34 @@ app.post('/api/phonebill', async function(req, res){
     const price_plan = req.body.price_plan
     const actions = req.body.actions
 
+    let status = ""
+    let message = ""
+    let total = "R0.00"
+
+    try {
     const payment_plan = await getSpecificPlan(price_plan)
     const call_cost = payment_plan[0].call_price
     const sms_cost = payment_plan[0].sms_price
-    const total = totalPhoneBill(actions, call_cost, sms_cost)
+    total = totalPhoneBill(actions, call_cost, sms_cost)
     countBills++
     let thePlan = `${countBills}_bill-${price_plan}`
     let eachPlan = `${countBills}_${price_plan}`
     allTotals[eachPlan] = total
     listOfBills[thePlan] = actions
 
+    status = "success"
+    message = "Price name valid"
+
+    } catch(err) {
+    status = "failure"
+    message = "Price name not valid!"
+
+    }
+    
     res.json({
-        status: "success",
-        total
+            status,
+            total,
+            message
 
     })
 })
