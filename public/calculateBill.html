@@ -59,17 +59,23 @@
           </p>
         </div>
         
-        <div>
+        
         <div class="row ">
         <input  class="m-1 col-md form-control" type="text" x-model="price_plan" placeholder="plan name">
         <input  class="m-1 col-md form-control" type="text" x-model="actions" placeholder="phone log">
         </div>
         <button class="m-3 btn btn-success" 
          type="button" @click="calculateBill">Calculate</button>
-        <p class="m-3" x-show="showTotal" x-transition>
-        <span x-text=" 'Total Bill = ' + totalPhoneBill"></span>
-        </p>
-        <div class="m-3 warningText" x-show="totalFail" x-transition>
+         <div class=" row m-3">
+          <template x-if="totalPhoneBill">
+            <p class="successText" x-text="'Total Bill = ' + totalPhoneBill"></p>
+          </template>
+          <template x-if="totalBillFail">
+            <p class="warningText" x-text="totalBillFail"></p>
+          </template>
+          </div>
+         <div class="row">
+        <div class="warningText" x-show="totalFail" x-cloak x-transition>
           <p x-text="failureMessage"></p>
         </div>
         </div>

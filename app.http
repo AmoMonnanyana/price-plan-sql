@@ -2,8 +2,8 @@ POST http://localhost:3000/api/phonebill
 content-type: application/json
 
 {
-    "price_plan" : "sms 101",
-    "actions" : "call, sms, call, call, sms"
+    "price_plan" : "amo plan",
+    "actions" : "call, sms, call, call, sms, call, sms"
 }
 
 ###
@@ -44,3 +44,10 @@ GET http://localhost:3000/api/price_plans/
 GET http://localhost:3000/api/history
 
 ###
+
+POST http://localhost:3000/api/delete/history
+content-type: application/json
+
+ {
+
+ }

@@ -14,3 +14,15 @@ body{
     color: red;
     font-weight:bold
 }
+.successText {
+    color: rgb(11, 141, 69);
+    font-weight:bold
+}
+
+.clearText {
+    font-weight: bold;
+}
+
+[x-cloak] {
+    display: none;
+}

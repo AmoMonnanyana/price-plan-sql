@@ -1,5 +1,5 @@
 import express from 'express';
-import {getPricePlans, updatePlan, deletePricePlanById, addPricePlan, getSpecificPlan} from './db.js';
+import {getPricePlans, updatePlan, deletePricePlanById, addPricePlan, getSpecificPlan, getHistory, addBillHistory, deleteHistory} from './db.js';
 
 import  totalPhoneBill from './totalPhoneBill.js';
 
@@ -7,20 +7,15 @@ const app = express();
 app.use(express.static('public'))
 app.use(express.json())
 
-const result1 = await getPricePlans()
-//console.log(result1)
-const result2 = await getSpecificPlan('call 501')
-  console.log(result2)
-
+//await addBillHistory('sms 101', 'call, sms, call', 'R5.89')
+//const result = await getHistory()
+//await deleteHistory()
+//console.log(result)
 
 console.log('end')
 
 //console.log(result2[0].call_price)
 
-
-const allTotals = {}
-const listOfBills = {}
-let countBills = 0
 
 app.post('/api/phonebill', async function(req, res){
     const price_plan = req.body.price_plan
@@ -35,11 +30,7 @@ app.post('/api/phonebill', async function(req, res){
     const call_cost = payment_plan[0].call_price
     const sms_cost = payment_plan[0].sms_price
     total = totalPhoneBill(actions, call_cost, sms_cost)
-    countBills++
-    let thePlan = `${countBills}_bill-${price_plan}`
-    let eachPlan = `${countBills}_${price_plan}`
-    allTotals[eachPlan] = total
-    listOfBills[thePlan] = actions
+    await addBillHistory(price_plan, actions, total)
 
     status = "success"
     message = "Price name valid"
@@ -98,10 +89,17 @@ app.post('/api/price_plan/delete', async function(req, res){
     })
 })
 
-app.get('/api/history', function(req, res){
+app.get('/api/history', async function(req, res){
+    const billHistory = await getHistory()
     res.json({
-        allTotals,
-        listOfBills
+        billHistory
+    })
+})
+
+app.post('/api/delete/history', async function(req, res){
+    await deleteHistory()
+    res.json({
+        status : "Bill history successfully cleared!"
     })
 })
 const PORT = process.env.PORT || 3000;

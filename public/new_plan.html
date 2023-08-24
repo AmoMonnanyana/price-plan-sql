@@ -57,8 +57,16 @@
         <input type="number" class="form-control col-md m-2" placeholder="sms cost" x-model="newSmsCost" >
       </div>
       <button class="btn btn-success m-3" type="button" @click="addNewPlan">Add Price Plan</button>
-      <div class="m-3" x-text="newMessage"></div> 
+      
+      <div class="m-3 row">
+        <template x-if="newMessage">
+          <p class="successText" x-text="newMessage"></p>
+        </template>
+        <template x-if="newPlanFail">
+          <p class="warningText" x-text="newPlanFail"></p>
+        </template>
+        </div>
     </section>
-    </div>
+    
 </body>
 </html>

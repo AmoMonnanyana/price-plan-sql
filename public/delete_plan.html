@@ -57,7 +57,15 @@
         </div>
         <button class="m-3 btn btn-success" type="button" @click="deletePlan"> Delete Price Plan</button>
         
-        <div class="m-3" x-text="deleteMessage"></div>
+        <div class="m-3 row">
+        <template x-if="deleteMessage">
+          <p class="successText" x-text="deleteMessage"></p>
+        </template>
+        <template x-if="deleteFail">
+          <p class="warningText" x-text="deleteFail"></p>
+        </template>
+        </div>
+        
     </section>
 </body>
 </html>

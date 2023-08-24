@@ -43,3 +43,18 @@ export async function deletePricePlanById(id){
     await db.run(sql, [id])
 } 
 
+ //Submitted bill history table
+ export async function addBillHistory(price_plan, actions, total) {
+    const sql = `insert into submitted_bill_history (price_plan, actions, total) values (?, ?, ?)`
+    await db.run(sql, [price_plan, actions, total])
+ }
+
+ export async function getHistory(){
+    const sql = await db.all(`select * from submitted_bill_history`)
+    return sql
+ }
+
+ export async function deleteHistory(){
+    const sql = `delete from submitted_bill_history`
+    await db.run(sql)
+ }

@@ -25,12 +25,19 @@ document.addEventListener('alpine:init', () => {
         countBills: 0,
         failureMessage: '',
         totalFail: false,
+        deleteHistoryMessage: '',
+        deleteFail: '',
+        updateFail: '',
+        newPlanFail: '',
+        totalBillFail: '',
+        emptyTable: '',
 
         calculateBill(){
-           return axios.post(`/api/phonebill`, {
+            if(this.price_plan && this.actions) {
+                return axios.post(`/api/phonebill`, {
                 "price_plan" : this.price_plan,
                 "actions" : this.actions
-            }).then((result) => {
+                }).then((result) => {
                 
                 if(result.data.status == "success") {
                 this.totalPhoneBill = result.data.total
@@ -52,6 +59,13 @@ document.addEventListener('alpine:init', () => {
                     this.failureMessage = ''
                   }, 3000)
             })
+            } else {
+                this.totalBillFail = "Plan name and phone log required!" 
+                setTimeout(() => {
+                    this.totalBillFail = ''
+                  }, 3000)
+            }
+           
         },
         getAllPricePlans(){
            return  axios.get(`/api/price_plans/`)
@@ -63,11 +77,12 @@ document.addEventListener('alpine:init', () => {
         },
 
         addNewPlan(){
-            return axios.post(`/api/price_plan/create`, {
+            if(this.newPlanName && this.newCallCost && this.newSmsCost) {
+                return axios.post(`/api/price_plan/create`, {
                 "name" : this.newPlanName,
                 "call_cost" : this.newCallCost,
                 "sms_cost" : this.newSmsCost
-            }).then((result) =>{
+                }).then((result) =>{
                 this.newMessage = result.data.message
                 setTimeout(() => {
                     this.newPlanName = ''
@@ -76,9 +91,17 @@ document.addEventListener('alpine:init', () => {
                     this.newMessage = ''
                   }, 3000)
             })
+            } else {
+                this.newPlanFail = "New price plan information required!"
+                setTimeout(() => {
+                    this.newPlanFail = ""
+                  }, 3000)
+            }
+            
         },
         updatePlan(){
-            return axios.post(`/api/price_plan/update`, {
+            if(this.updatename && this.updateCallCost && this.updateSmsCost) {
+                return axios.post(`/api/price_plan/update`, {
                 "name" : this.updatename,
                 "call_cost" : this.updateCallCost,
                 "sms_cost" : this.updateSmsCost
@@ -91,9 +114,17 @@ document.addEventListener('alpine:init', () => {
                     this.updateMessage = ''
                   }, 3000)
             })
+            } else {
+                this.updateFail = "Update information required!"
+                setTimeout(() => {
+                   this.updateFail = ''
+                  }, 3000)
+            }
+            
         },
     
         deletePlan(){
+            if(this.planId){
             return axios.post(`/api/price_plan/delete`, {
                 "id" : this.planId
             }).then((result) => {
@@ -102,19 +133,49 @@ document.addEventListener('alpine:init', () => {
                     this.planId = 0
                     this.deleteMessage = ''
                   }, 3000)
-            })
+            }) 
+            } else {
+                this.deleteFail = "Plan Id required!"
+                setTimeout(() => {
+                    this.deleteFail = ""
+                  }, 3000)
+            }
+            
         },
 
+        viewTable (){
+            this.showHistory = false
+        },
         getBillHistory (){
             return axios.get(`/api/history`)
-            .then((result) => {
-                this.billHistory = result.data.allTotals
-                this.thePlans =  Object.keys(this.billHistory)
-                this.listOfBills = result.data.listOfBills
+            .then((result) => { 
+                this.billHistory = result.data.billHistory
                 console.log(this.billHistory)
-                console.log(this.listOfBills)
-                this.showHistory = !this.showHistory
+                this.showHistory = true
             })
+        },
+        clearHistory (){
+            if (this.billHistory.length > 0) {
+                 return axios.post('/api/delete/history', {})
+                .then((result) => {
+                this.deleteHistoryMessage = result.data.status
+                this.getBillHistory ()
+                setTimeout(() => {
+                    this.deleteHistoryMessage = ''
+                  }, 3000)
+            })
+            } else {
+                this.emptyTable = "Bill History clear!"
+                setTimeout(() => {
+                    this.emptyTable = ''
+                  }, 3000)
+            }
+           
+        },
+
+        init(){
+            this.getAllPricePlans()
+            
         }
       }
     })
